@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+  <head>
+    <title>Interactive Map of Forest Hills</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> 
+    <meta charset="utf-8">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <input id="pac-input" class="controls" type="text"  data-bind="value: searchTerm, enterKey: onEnter" placeholder="Enter a place to search in Forest Hills from the list below">
+    <div>
+      <ul data-bind="foreach: locationList" id="place-list" class="list-group">
+        <li data-bind="text: name, click: $parent.setLocation, attr: {class: liClass}"></li>
+      </ul>
+    </div>
+    <div id="map-canvas"></div>
+    <div id="pano"></div>
+    <script src="js/libs/jQuery.js"></script>
+    <script src="js/libs/knockout-3.3.0.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+    <script src="js/app2.js"></script>
+  </body>
+</html>
