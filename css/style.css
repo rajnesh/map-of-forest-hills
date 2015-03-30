@@ -1,4 +1,3 @@
-
 html, body, #map-canvas, #pano {
   height: 100%;
   margin: 0px;
@@ -6,7 +5,7 @@ html, body, #map-canvas, #pano {
 }
 
 #map-canvas, #pano {
-  width: 45%;
+  width: 50%;
   float:left;
 }
 
