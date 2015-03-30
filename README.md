@@ -10,7 +10,7 @@ You can interact with the map as follows:
 
 1. Click on the places listed on the left side of the map. This will bring up its Street View on the right. The respective marker will become more opaque. The list item will turn blue.
 2. Click on a marker. This will bring up its Street View on the right. The respective marker will become more opaque. The list item will turn blue.
-3. Search for any of the items listed on the left side of the map using the search box. For example, searching for "pizza" will show highlight two items in the list and show just their markers.
+3. Search for any of the items listed on the left side of the map using the search box. For example, searching for "pizza" will highlight in green two items in the list and show just their markers.
 4. Searching for an empty string will bring all the markers back.
 
 
