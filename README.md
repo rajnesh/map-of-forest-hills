@@ -4,6 +4,7 @@ Its uses version 3.19 of the [Google Maps API](https://developers.google.com/map
 
 Other than knockoutJS, Bootstrap and jQuery libraries, the application has index.html, js/app.js and css/style.css.
 
+Copy the files in your local drive. Open index.html in your browser to start the application. 
 Once the application launches, it shows a split-screen: the left half is a Google Map of Forest Hills with markers and the right half is a placeholder for street views.
 
 You can interact with the map as follows:
