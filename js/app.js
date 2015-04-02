@@ -7,7 +7,7 @@ var ps; //declares global google place service variable
 var mapCenter = { lat: 40.720259, lng: -73.844046}; //latitude/longtitude of Forest Hills, NY (Hometown of Simon & Garfunkle)
 var mapSouthWestBounds = { lat: 40.7200004, lng: -73.8472659};
 var mapNorthEastBounds = { lat: 40.7205189, lng: -73.8429087};
-var mapZoom = 14; //starting zoom level
+var mapZoom = 16; //starting zoom level
 var mapBounds; 
 
 var svRadius = 50; //search radius for street view
@@ -93,7 +93,7 @@ var allLocations = [
 var initializeMap = function() {
   var mapOptions = {
     center: mapCenter,
-    zoom: 16,
+    zoom: mapZoom,
     disableDefaultUI: true,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     streetViewControl: false
@@ -131,7 +131,7 @@ var initializeMap = function() {
     //Since inside a loop, added closure to listen for the right marker
     google.maps.event.addListener(marker, 'click', function(m) {
       return function() {
-        for (j = 0; j < allLocations.length; j++ ) {
+        for (var j = 0; j < allLocations.length; j++ ) {
           if (allLocations[j].marker == m) { 
             locIndex = j;
             m.setOpacity(1);
@@ -141,7 +141,9 @@ var initializeMap = function() {
             };
             ps.getDetails(request, function(place, status) {
               if (status === google.maps.places.PlacesServiceStatus.OK) {
-                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '<br> Phone:' + place.formatted_phone_number + '<br> Website:' + place.website);
+                var infoText = "<div><strong>" + place.name + "</strong><br>" + place.formatted_address + "<br> Phone:" + place.formatted_phone_number;
+                if (typeof place.website !== "undefined") infoText = infoText + "<br> Website:" + place.website; 
+                infowindow.setContent(infoText);
                 infowindow.open(map, m);
               }
             });
@@ -160,7 +162,7 @@ var initializeMap = function() {
         else {
           showPanorama(locIndex);
         }
-      }
+      };
     }(marker));
   }
   window.addEventListener('resize', function(e) {
@@ -232,32 +234,18 @@ var ViewModel = function() {
       }
       return;
     } 
-    for (i = 0; i < allLocations.length; i++) {
-      if(allLocations[i].name.toLowerCase().search(st.toLowerCase()) !== -1 ) {
-        showLocation(this.locationList()[i],i);
+    for (var j = 0; j < allLocations.length; j++) {
+      if(allLocations[j].name.toLowerCase().search(st.toLowerCase()) !== -1 ) {
+        showLocation(this.locationList()[j],j);
       }
       else {
-        hideLocation(this.locationList()[i],i);
+        hideLocation(this.locationList()[j],j);
       }
     }
   };
   
  
-  //Knockout bound to the li click event
-  this.setLocation = function(clickedLocation) {
-    var index = clickedLocation.index();
-    if(clickedLocation.state() !== locStates[2]) {
-      infowindow.close();
-      showClickedLocation(clickedLocation,index,locIndex);
-      locIndex = index;
-      if (jQuery.isEmptyObject(allLocations[index].svData)) {   
-        sv.getPanoramaByLocation(new google.maps.LatLng(allLocations[index].lat, allLocations[index].lang), svRadius, streetViewCallback);
-      }
-      else {
-        showPanorama(index);
-      }
-    }
-  }; 
+
   
   //sets attributes for observables and marker when an li is clicked
   var showClickedLocation = function(setLocation,i,oldi) {
@@ -288,6 +276,22 @@ var ViewModel = function() {
     allLocations[i].marker.setOpacity(0.5);
     setLocation.state(locStates[0]);
     allLocations[i].marker.setVisible(false);
+  }; 
+  
+  //Knockout bound to the li click event
+  this.setLocation = function(clickedLocation) {
+    var index = clickedLocation.index();
+    if(clickedLocation.state() !== locStates[2]) {
+      infowindow.close();
+      showClickedLocation(clickedLocation,index,locIndex);
+      locIndex = index;
+      if (jQuery.isEmptyObject(allLocations[index].svData)) {   
+        sv.getPanoramaByLocation(new google.maps.LatLng(allLocations[index].lat, allLocations[index].lang), svRadius, streetViewCallback);
+      }
+      else {
+        showPanorama(index);
+      }
+    }
   }; 
 };
 

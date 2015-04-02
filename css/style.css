@@ -4,11 +4,15 @@ html, body, #map-canvas, #pano {
   padding: 0px;
 }
 
-#map-canvas, #pano {
-  width: 50%;
+#map-canvas {
+  width: 60%;
   float: left;
 }
 
+#pano {
+  width: 40%;
+  float: left;
+}
 
 /* Serach box styling by Google */
 .controls {
@@ -36,6 +40,9 @@ html, body, #map-canvas, #pano {
 @media only screen and (max-width: 500px) {
   #pac-input {
     width: 100px;
+  }
+  #map-canvas {
+    width: 100%;
   }
 }
 
