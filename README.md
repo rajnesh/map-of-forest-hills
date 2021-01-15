@@ -1,4 +1,4 @@
-This application is an **interactive map of Forest Hills, NY**, with markers at my favorite spots.
+Built as part of Udacity's nanodegree program, this application is an **interactive map of Forest Hills, NY**, with markers at my favorite spots.
 
 It uses version 3.19 of the [Google Maps API](https://developers.google.com/maps/documentation/javascript/) and [Google Street View API](https://developers.google.com/maps/documentation/streetview/index) along with the very awesome [KnockoutJS](http://knockoutjs.com/) for UI bindings. It also uses jQuery (my eternal gratitude to John Resig for inventing it and the jQuery team for maintaining it so well) and Bootstrap for aesthetics. 
 
